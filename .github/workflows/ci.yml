@@ -17,7 +17,7 @@ jobs:
       - run: python3 vendor/holepunch/scripts/sync-i18n.py --check
       - run: node --test vendor/holepunch/tests/i18n.test.cjs
       - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
-      - uses: dtolnay/rust-toolchain@1.91.1
+      - uses: dtolnay/rust-toolchain@1.120.0
         with:
           components: rustfmt, clippy
       - uses: Swatinem/rust-cache@v2

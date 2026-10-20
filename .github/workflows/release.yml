@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: dtolnay/rust-toolchain@1.91.1
+      - uses: dtolnay/rust-toolchain@1.120.0
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python vendor/holepunch/scripts/check-repository.py --root .
