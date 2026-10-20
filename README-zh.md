@@ -1,6 +1,6 @@
 # HolePunch Cloud
 
-<img src="docs/assets/logo.svg" alt="HolePunch 标志" width="96">
+<img src="docs/assets/logo.png" alt="HolePunch 标志" width="96">
 
 [![许可证：Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Rust 1.91.1+](https://img.shields.io/badge/Rust-1.91.1%2B-orange.svg)
@@ -139,4 +139,4 @@ cargo test --workspace --locked
 
 HolePunch Cloud 采用 [Apache-2.0](LICENSE)。固定版本的 HolePunch 核心及第三方组件保留各自的许可证声明，详见[第三方声明](docs/zh-CN/NOTICE.md)。
 
-<!-- translation-source: README.md; source-sha256: f833e98f3165b2d510b447e74051ee820a0b1e36ccb67558d43856a1fd94d72a -->
+<!-- translation-source: README.md; source-sha256: 2eb1475ebfc451efdcda9dc1bfa2a7340a7ecfb21921be7dbf89e393944b957a -->
