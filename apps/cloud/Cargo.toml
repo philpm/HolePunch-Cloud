@@ -1,0 +1,28 @@
+[package]
+name = "holepunch-cloud"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+publish = false
+[[bin]]
+name = "holepunch-cloud"
+path = "src/main.rs"
+[[bin]]
+name = "holepunch-center"
+path = "src/compat.rs"
+[dependencies]
+holepunch-server-core = { path = "../../vendor/holepunch/crates/server-core" }
+anyhow = "1"
+axum = "0.8"
+rusqlite = "0.32"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+lettre = { version = "0.11", default-features = false, features = ["builder", "smtp-transport", "tokio1-rustls-tls"] }
+[dev-dependencies]
+async-trait = "0.1"
+tempfile = "3"
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"

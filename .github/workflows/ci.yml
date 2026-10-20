@@ -1,0 +1,47 @@
+name: Cloud CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python vendor/holepunch/scripts/check-repository.py --root .
+      - uses: actions/setup-node@v4
+        with: {node-version: 24}
+      - run: python3 vendor/holepunch/scripts/sync-i18n.py --check
+      - run: node --test vendor/holepunch/tests/i18n.test.cjs
+      - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - uses: dtolnay/rust-toolchain@1.91.1
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo test --workspace --locked
+      - run: python3 scripts/build.py
+      - run: docker compose -p holepunch-cloud-ci --env-file tests/compose.env config --quiet
+      - name: Validate release Compose
+        run: docker compose --env-file tests/compose.env -f deploy/compose.release.yml config --quiet
+        env:
+          HP_IMAGE_PREFIX: example.invalid/holepunch-cloud
+          HP_VERSION: ci-validation
+      - run: docker compose -p holepunch-cloud-ci --env-file tests/compose.env build
+      - name: Prepare isolated integration tools
+        run: |
+          mkdir -p output/tools
+          docker pull caddy:2.11.4
+          caddy_id=$(docker create caddy:2.11.4)
+          docker cp "$caddy_id:/usr/bin/caddy" output/tools/caddy
+          docker rm "$caddy_id"
+          rathole_id=$(docker create holepunch-cloud-ci-rathole)
+          docker cp "$rathole_id:/usr/local/bin/rathole" output/tools/rathole
+          docker rm "$rathole_id"
+          chmod +x output/tools/*
+      - run: python3 scripts/e2e-multi-user.py --caddy output/tools/caddy --rathole output/tools/rathole --rate-seconds 60
+      - run: python3 scripts/e2e.py --caddy output/tools/caddy --rathole output/tools/rathole

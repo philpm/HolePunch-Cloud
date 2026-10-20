@@ -1,0 +1,23 @@
+/target/
+/output/
+/dist/
+.env
+.DS_Store
+__pycache__/
+*.pyc
+
+*.access.txt
+/.playwright-cli/
+
+# Local configuration, secrets, and operational evidence.
+.env.*
+!.env.example
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.log
+*.pem
+*.key
+/private/

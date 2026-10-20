@@ -1,0 +1,3 @@
+[submodule "vendor/holepunch"]
+	path = vendor/holepunch
+	url = https://github.com/philpm/HolePunch.git
