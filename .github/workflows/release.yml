@@ -18,7 +18,7 @@ jobs:
         with:
           submodules: recursive
       - uses: dtolnay/rust-toolchain@1.91.1
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - run: python vendor/holepunch/scripts/check-repository.py --root .
       - uses: Swatinem/rust-cache@v2
