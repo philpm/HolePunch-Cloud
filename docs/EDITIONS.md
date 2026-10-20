@@ -1,5 +1,7 @@
 # Repository and product boundaries
 
+[English](EDITIONS.md) | [简体中文](zh-CN/EDITIONS.md)
+
 [HolePunch](https://github.com/philpm/HolePunch) and [HolePunch Cloud](https://github.com/philpm/HolePunch-Cloud) are Apache-2.0 projects that build and release independently.
 
 HolePunch owns server/client cores, the single-administrator Self-hosted server, CLI, optional desktop app, and localized web console. Cloud owns multi-user registration, SMTP delivery, invitations, user administration, resource policy, and their tests. Generic operator documentation is public; production credentials, customer information, and internal operational evidence stay outside both repositories.

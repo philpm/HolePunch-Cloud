@@ -1,5 +1,7 @@
 # Contributing
 
+[English](CONTRIBUTING.md) | [简体中文](docs/zh-CN/CONTRIBUTING.md)
+
 Start with the [documentation](docs/README.md), [architecture](docs/ARCHITECTURE.md), and [code of conduct](CODE_OF_CONDUCT.md). Open a focused issue or pull request with a reproducible problem and the intended behavior. Security vulnerabilities use the private process in [Security](SECURITY.md).
 
 ## Set up and validate
@@ -23,7 +25,7 @@ Authentication, tenant policy, database, or data-plane changes also require the 
 
 Make shared forwarding, CLI, console, and translation changes in HolePunch first. Publish the reviewed commit, update Cloud's submodule to that exact revision, and rerun Cloud validation. Do not duplicate shared modules or hand-edit generated catalogs.
 
-Use English for documentation, code comments, identifiers, CLI help, diagnostics, and examples. Localize every browser-visible message through the shared English and Simplified Chinese catalogs. Preserve interpolation, accessible labels, user content, and form drafts; see [Localization](docs/I18N.md). Questions in any language are welcome.
+Use English for documentation, code comments, identifiers, CLI help, diagnostics, and examples. Localize every browser-visible message through the shared English and Simplified Chinese catalogs. Preserve interpolation, accessible labels, user content, and form drafts; see [Localization](docs/I18N.md). Maintain the corresponding Simplified Chinese guides in `README-zh.md` and `docs/zh-CN/` when changing documented behavior. Questions in any language are welcome.
 
 ## Pull requests and licensing
 

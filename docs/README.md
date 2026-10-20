@@ -1,5 +1,7 @@
 # Documentation
 
+[English](README.md) | [简体中文](zh-CN/README.md)
+
 These guides describe the current Cloud development build. English documentation is authoritative; the interface supports English and Simplified Chinese.
 
 | Task | Guide |

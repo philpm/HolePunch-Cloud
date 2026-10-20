@@ -1,5 +1,7 @@
 # Cloud testing
 
+[English](TESTING.md) | [简体中文](zh-CN/TESTING.md)
+
 ## Required local checks
 
 ```sh

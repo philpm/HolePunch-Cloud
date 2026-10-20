@@ -1,5 +1,7 @@
 # Cloud release guide
 
+[English](RELEASE.md) | [简体中文](zh-CN/RELEASE.md)
+
 Cloud is an Apache-2.0 development build. Its version is defined in `Cargo.toml`; the shared core is pinned by `vendor/holepunch`. Public release assets and container images must actually exist before documenting them as downloadable.
 
 ## Build and verify

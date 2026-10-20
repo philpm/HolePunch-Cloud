@@ -1,5 +1,7 @@
 # Security reporting and operations
 
+[English](SECURITY.md) | [简体中文](docs/zh-CN/SECURITY.md)
+
 Cloud source is public under Apache-2.0. Keep operational credentials and user data private. Coordinate shared-core fixes with the HolePunch security process before disclosure.
 
 Use HTTPS for the public console, TLS for SMTP, separate client identities, CSRF-protected sessions and least-privilege service accounts. Keep raw panel, Caddy Admin and internal gateway ports private. Disable registration until real email delivery is verified. Never use development outbox or insecure HTTP settings in production.

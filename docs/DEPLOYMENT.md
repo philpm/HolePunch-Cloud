@@ -1,5 +1,7 @@
 # Cloud deployment and upgrades
 
+[English](DEPLOYMENT.md) | [简体中文](zh-CN/DEPLOYMENT.md)
+
 See [Installation](INSTALLATION.md) for fresh installations. Production uses the Cloud binary with a pinned public core, patched rathole and Caddy. Docker is optional. Keep panel, Caddy Admin and internal bandwidth gateway listeners private; expose only intended public HTTPS, control and tunnel ports.
 
 ## Configuration

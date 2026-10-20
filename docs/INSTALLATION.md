@@ -1,5 +1,7 @@
 # Cloud installation
 
+[English](INSTALLATION.md) | [简体中文](zh-CN/INSTALLATION.md)
+
 Clone `https://github.com/philpm/HolePunch-Cloud.git` with `--recurse-submodules`. The core is pinned to a commit. Python 3.10+ is required by deployment tools; source builds require Rust 1.91.1+ and platform build tools. Cloud release assets and images are published separately; the commands below do not assume that unpublished artifacts exist.
 
 ## 1. Interactive native installation

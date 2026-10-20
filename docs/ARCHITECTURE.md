@@ -1,5 +1,7 @@
 # Cloud architecture
 
+[English](ARCHITECTURE.md) | [简体中文](zh-CN/ARCHITECTURE.md)
+
 Cloud is a small Rust application linked to a pinned `holepunch-server-core`. Its router adds email registration/verification/reset, SMTP delivery, administrator users/invitations and default policy. The shared core provides sessions, ownership enforcement, clients/tunnels, enrollment, configuration reconciliation, local websites, setup and the console. SQLite schema 4 stores metadata; rathole carries Noise-encrypted device connections and Caddy routes HTTPS.
 
 Each Cloud tunnel passes through an in-process gateway with one token bucket shared across connections and both directions. User quotas constrain allocations at configuration time; the data plane enforces each tunnel's rate. Disabled tunnels retain their allocation. No cumulative transfer billing is implemented.

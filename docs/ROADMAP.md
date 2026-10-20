@@ -1,5 +1,7 @@
 # Cloud iteration plan
 
+[English](ROADMAP.md) | [简体中文](zh-CN/ROADMAP.md)
+
 ## Current iteration: align the operator experience
 
 Shared core pin, English source documentation/diagnostics, visible persistent language switching, administrator setup, role-scoped sidebar, and deployment summaries across native/source/Compose. Preserve existing tenant isolation and per-tunnel allocations. Deliver a tested upgrade path from the older unlabeled server to Cloud schema 4, with backup and rollback.

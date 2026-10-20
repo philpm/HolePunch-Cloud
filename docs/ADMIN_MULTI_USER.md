@@ -1,5 +1,7 @@
 # Cloud administrator guide
 
+[English](ADMIN_MULTI_USER.md) | [简体中文](zh-CN/ADMIN_MULTI_USER.md)
+
 Sign in with an email and password. Use Language in the header to switch English/Simplified Chinese. The sidebar separates Overview, Clients, Tunnels, Bandwidth allocation and Account settings; administrators also see User management, Default policy, Local websites, Node settings, Audit log and Setup guide.
 
 ## First setup
