@@ -28,7 +28,7 @@ jobs:
         working-directory: vendor/holepunch
         run: ./scripts/prepare-sidecar.sh ${{ matrix.target }}
       - run: python3 scripts/package.py --target ${{ matrix.target }} --bin-dir target/release --rathole vendor/holepunch/apps/desktop/src-tauri/binaries/holepunch-rathole-${{ matrix.target }}${{ matrix.ext }} --out dist
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: holepunch-cloud-${{ matrix.target }}
           path: dist/*
