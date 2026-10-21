@@ -3,8 +3,18 @@ updates:
   - package-ecosystem: cargo
     directory: /
     schedule: {interval: weekly}
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
+    groups:
+      compatible-rust:
+        patterns: ["*"]
+        update-types: [minor, patch]
   - package-ecosystem: github-actions
     directory: /
     schedule: {interval: weekly}
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
+    groups:
+      actions:
+        patterns: ["*"]
+    # Toolchain version tags may precede actual compiler releases.
+    ignore:
+      - dependency-name: dtolnay/rust-toolchain

@@ -25,3 +25,9 @@ Review lockfile updates and upstream licenses, run relevant tests, and record us
 Never label an Actions artifact as a published stable release. Validate the actual archive, checksum, version, platform, license inventory, and installation flow before uploading release assets.
 
 References: [GitHub repository practices](https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories), [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+## CI and dependency updates
+
+CI runs on pull requests and `main`, with superseded runs canceled. Compatible Cargo updates and Actions updates are grouped by Dependabot. Compiler changes are reviewed manually against the documented Rust 1.91.1 baseline; toolchain action tags can precede compiler releases. Server jobs use Ubuntu 24.04 and audit the Cloud lockfile using the shared audit script.
+
+The core submodule must be reachable from a clean public clone at the exact pinned commit. Update shared fixes in HolePunch first, then update this gitlink and lockfile. Do not introduce cross-repository credentials for a publicly readable submodule.
