@@ -6,11 +6,13 @@ permissions:
 jobs:
   native:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - {os: ubuntu-22.04, target: x86_64-unknown-linux-gnu, ext: ''}
           - {os: ubuntu-24.04-arm, target: aarch64-unknown-linux-gnu, ext: ''}
           - {os: macos-15, target: aarch64-apple-darwin, ext: ''}
+          - {os: macos-15-intel, target: x86_64-apple-darwin, ext: ''}
           - {os: windows-2022, target: x86_64-pc-windows-msvc, ext: '.exe'}
     runs-on: ${{ matrix.os }}
     steps:
@@ -20,16 +22,23 @@ jobs:
       - uses: dtolnay/rust-toolchain@1.91.1
       - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
+      - uses: actions/setup-node@v7
+        with: {node-version: 24}
       - run: python vendor/holepunch/scripts/check-repository.py --root .
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: python vendor/holepunch/scripts/sync-i18n.py --check
+      - run: node --test vendor/holepunch/tests/i18n.test.cjs
       - uses: Swatinem/rust-cache@v2
       - run: cargo test --workspace --locked
       - run: python vendor/holepunch/scripts/audit-dependencies.py --root . --lockfile Cargo.lock --allow-informational
       - run: python3 scripts/build.py --release
-      - shell: bash
-        working-directory: vendor/holepunch
-        run: ./scripts/prepare-sidecar.sh ${{ matrix.target }}
+      - run: python vendor/holepunch/scripts/build-rathole.py ${{ matrix.target }}
       - run: python3 scripts/package.py --target ${{ matrix.target }} --bin-dir target/release --rathole vendor/holepunch/apps/desktop/src-tauri/binaries/holepunch-rathole-${{ matrix.target }}${{ matrix.ext }} --out dist
+      - name: Verify packaged installation on the target platform
+        run: python vendor/holepunch/tests/smoke-native.py --edition cloud --dist dist --expected-revision ${{ github.sha }} --report dist/validation-${{ matrix.target }}.json
       - uses: actions/upload-artifact@v7
         with:
           name: holepunch-cloud-${{ matrix.target }}
           path: dist/*
+          if-no-files-found: error
+          retention-days: 30

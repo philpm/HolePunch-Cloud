@@ -6,7 +6,7 @@ import sys
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent if SCRIPT_DIR.name == 'scripts' else SCRIPT_DIR
 CORE = ROOT / 'vendor/holepunch'
-SHARED = CORE / 'scripts' if CORE.is_dir() else ROOT / 'shared'
+SHARED = CORE / 'scripts' if (CORE / 'scripts' / 'deploy.py').is_file() else ROOT / 'shared'
 
 
 def load(name):

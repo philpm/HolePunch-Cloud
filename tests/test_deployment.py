@@ -121,6 +121,8 @@ class DeploymentTests(unittest.TestCase):
             (root / 'shared').mkdir()
             for name in ['deploy.py', 'setup.py', 'compose.py', 'access.py']:
                 shutil.copyfile(ROOT / 'vendor/holepunch/scripts' / name, root / 'shared' / name)
+            # Release archives also carry core documentation, without its source scripts.
+            (root / 'vendor/holepunch/docs').mkdir(parents=True)
             command = [sys.executable, str(root / 'setup.py'), '--public-host', 'edge.example.test']
             subprocess.run(command, cwd=root, check=True, capture_output=True)
             self.assertIn('HP_EDITION=cloud', (root / '.env').read_text())
@@ -131,8 +133,8 @@ class DeploymentTests(unittest.TestCase):
 
     def test_cloud_diagnostics_are_localized(self):
         import re
-        source = (ROOT / 'apps/cloud/src/lib.rs').read_text()
-        catalog = json.loads((ROOT / 'vendor/holepunch/web/locales/en.json').read_text())
+        source = (ROOT / 'apps/cloud/src/lib.rs').read_text(encoding='utf-8')
+        catalog = json.loads((ROOT / 'vendor/holepunch/web/locales/en.json').read_text(encoding='utf-8'))
         messages = re.findall(r'bad\("([^"]+)"\)|StatusCode::[A-Z_]+,\s*"([^"]+)"', source)
         for pair in messages:
             self.assertIn(next(value for value in pair if value), catalog)
