@@ -17,7 +17,7 @@ python3 scripts/package.py --target aarch64-apple-darwin --bin-dir target/releas
 
 归档为 `holepunch-cloud-<version>-<target>.tar.gz`（Windows 为 ZIP），附相邻 `.sha256`。内容包括 Cloud、共享 CLI、补丁版 rathole、安装工具、通用文档、Apache-2.0/第三方声明、依赖清单和构建元数据。Caddy 另行提供或由安装器校验下载，兼容服务端安装名为 `holepunch-center`。
 
-手动发布工作流为 Linux x64/ARM64、macOS ARM64、Windows x64 构建 Actions 归档，不创建 Release 或发布镜像。原生安装器需在各目标 OS 验证，本地构建成功不能证明跨平台支持。
+手动发布工作流为 Linux x64/ARM64、macOS x64/ARM64、Windows x64 构建 Actions 归档，不创建 Release 或发布镜像。每个原生任务先验证实际归档，并上传不含凭据的 `validation-<target>.json` 报告。原生安装器需在各目标 OS 验证，本地构建成功不能证明跨平台支持。
 
 ## 发布经过测试的版本
 
@@ -31,4 +31,17 @@ Cloud 和 rathole 镜像应从本仓库及固定核心构建，在 `deploy/compo
 
 分支与 GitHub 发布设置见[维护](MAINTAINING.md)。生产备份和详细运维证据不进入公开历史或发布产物。
 
-<!-- translation-source: docs/RELEASE.md; source-sha256: f65c55af339583351e7a0550becbb824da15735852771e7733e07bbb561c18a3 -->
+
+## 原生归档验收
+
+发布流程验证 SHA256、产品/核心提交、二进制版本、版本类型、许可证清单、中英文文档和归档内独立工具。随后在临时目录安装，启动三个进程，登录并重启，确认凭据保留及退出后端口释放。Windows 使用控制台中断，POSIX 使用 SIGTERM。Caddy 按固定上游校验和下载，不安装系统服务。
+
+```sh
+python3 vendor/holepunch/tests/smoke-native.py --edition cloud --dist dist
+# After publication, verify the actual download and version-based installation:
+python3 vendor/holepunch/tests/smoke-native.py --edition cloud --release-version v0.4.0-dev.1
+```
+
+归档同时附带 `SHA256SUMS`、相邻 `.sha256` 和中英文发布说明。生产验收完成前保持 **Pre-release**。原生冒烟不能证明公网 CA 签发、真实 SMTP 投递、生产迁移、持续负载或桌面签名/公证已通过；发布说明应列明尚未验证的范围。
+
+<!-- translation-source: docs/RELEASE.md; source-sha256: 226b087dca820e7bfbd136d30ca8792a26e762aeafdcf830b0c79dcc3160dc5c -->
