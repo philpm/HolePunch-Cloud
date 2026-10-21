@@ -2,6 +2,12 @@
 
 [English](CHANGELOG.md) | [简体中文](docs/zh-CN/CHANGELOG.md)
 
+## Unreleased — CI and dependency maintenance
+
+- Update the shared core and Cloud lockfile with cryptography compatibility fixes and patched TLS/QUIC dependencies.
+- Audit Cloud dependencies in CI and release builds, including explicit failures when the advisory service remains unavailable.
+- Update Actions, group dependency PRs, avoid duplicate CI runs, and preserve the tested compiler baseline.
+
 ## Unreleased — bilingual documentation
 
 - Rewrite both project homepages around features, a complete quickstart, configuration, and contributor resources.

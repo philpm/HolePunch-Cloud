@@ -26,4 +26,10 @@
 
 参考：[GitHub 仓库维护实践](https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories)、[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)。
 
-<!-- translation-source: docs/MAINTAINING.md; source-sha256: 6fcbc60635211adbd1aca505e1a9416cea77b3cc08acc416106ef25c599c8e98 -->
+## CI 与依赖更新
+
+CI 对 PR 和 `main` 运行，并取消过时任务。Dependabot 合并兼容的 Cargo 更新及 Actions 更新。编译器调整需根据文档中的 Rust 1.91.1 基线人工审阅；工具链 action 标签可能早于编译器发布。服务端任务使用 Ubuntu 24.04，通过共享审计脚本检查 Cloud 锁文件。
+
+核心子模块的固定提交必须能从全新公开克隆中获取。先在 HolePunch 完成共享修复，再更新这里的 gitlink 和锁文件。公开可读的子模块不需要跨仓库凭据。
+
+<!-- translation-source: docs/MAINTAINING.md; source-sha256: 4e5aef8c8936cdf1f073f48444699263046b80c4e5067f8ba7c23dfde2f768f2 -->

@@ -2,6 +2,12 @@
 
 [English](../../CHANGELOG.md) | 简体中文 · [文档目录](README.md)
 
+## 未发布 — CI 与依赖维护
+
+- 更新共享核心和 Cloud 锁文件，包含加密兼容性修复及 TLS/QUIC 漏洞补丁。
+- CI 和发布构建审计 Cloud 依赖；公告服务持续不可用时明确失败。
+- 更新 Actions、合并依赖 PR、避免重复 CI，并保留已验证的编译器基线。
+
 ## 未发布 — 双语文档
 
 - 围绕特性、完整快速开始、配置和贡献资源重写两个首页。
@@ -24,4 +30,4 @@
 - Cloud 诊断与邮件内容改为英文，控制台错误支持翻译。
 - 记录已有原生部署从 schema 2 迁移、备份与回滚的方法。
 
-<!-- translation-source: CHANGELOG.md; source-sha256: 762de00e3de95524269321cd2a954fbaf2619c6c8b1e7bdb0af024cd90e2978f -->
+<!-- translation-source: CHANGELOG.md; source-sha256: bfda47be22d72e230a016105e5089a659bac89d3e8f1a4277ad1439d999c4c71 -->

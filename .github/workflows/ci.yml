@@ -1,18 +1,25 @@
 name: Cloud CI
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   cloud:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: {python-version: '3.12'}
       - run: python vendor/holepunch/scripts/check-repository.py --root .
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with: {node-version: 24}
       - run: python3 vendor/holepunch/scripts/sync-i18n.py --check
       - run: node --test vendor/holepunch/tests/i18n.test.cjs
@@ -24,6 +31,7 @@ jobs:
       - run: cargo fmt --all -- --check
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - run: cargo test --workspace --locked
+      - run: python vendor/holepunch/scripts/audit-dependencies.py --root . --lockfile Cargo.lock --allow-informational
       - run: python3 scripts/build.py
       - run: docker compose -p holepunch-cloud-ci --env-file tests/compose.env config --quiet
       - name: Validate release Compose
